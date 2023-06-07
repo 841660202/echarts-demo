@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 引入 echarts.js -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+  <style>
+    #main {
+      width: 600px;
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main"></div>
+  <script>
+    var myChart = echarts.init(document.getElementById('main'));
+    var option;
+    option = {
+      title: {
+        text: '树懒课堂访问时间分析',
+        subtext: '单位：千',
+      },
+      tooltip: {},
+      visualMap: {
+        max: 12,
+        inRange: {
+          color: ['#006edd', '#e0ffff']
+        }
+      },
+      xAxis3D: {
+        type: 'category',
+        data: ['周一', '周二', '周三', '周四'],
+      },
+      yAxis3D: {
+        type: 'category',
+        data: ['早上访问', '下午访问', '晚上访问'],
+      },
+      zAxis3D: {
+        type: 'value',
+      },
+      grid3D: {
+        boxWidth: 200,
+        boxDepth: 80,
+        viewControl: {
+          // Change the projection to perspective for a better 3D effect
+          projection: 'perspective'
+        },
+        light: {
+          main: {
+            intensity: 1.2,
+            shadow: true
+          },
+          ambient: {
+            intensity: 0.3
+          }
+        }
+      },
+      series: [{
+        type: 'bar3D',
+        data: [
+          [0, 0, 4],
+          [1, 0, 2],
+          [2, 0, 3],
+          [3, 0, 1],
+          [0, 1, 2],
+          [1, 1, 3],
+          [2, 1, 6],
+          [3, 1, 4],
+          [0, 2, 3],
+          [1, 2, 2],
+          [2, 2, 1],
+          [3, 2, 4]
+        ],
+        shading: 'lambert',
+        label: {
+          show: true,
+          textStyle: {
+            fontSize: 12,
+            borderWidth: 1
+          }
+        },
+        emphasis: {
+          label: {
+            textStyle: {
+              fontSize: 16,
+              color: '#900'
+            }
+          },
+          itemStyle: {
+            color: '#900'
+          }
+        }
+      }],
+    };
+    myChart.setOption(option);
+  </script>
+</body>
+
+</html>

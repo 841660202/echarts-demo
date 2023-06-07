@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 引入 echarts.js -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+  <!-- 引入 echarts 及其依赖的文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js">
+</head>
+
+<body>
+
+  <div id="main" style="width: 600px;height:400px;"></div>
+  <script>
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var xAxisData = ['北京', '上海', '深圳', '广州', '杭州'];
+    var data1 = [200, 100, 200, 50, 100];
+    var data2 = [300, 200, 300, 200, 400];
+    option = {
+      backgroundColor: '#191970',
+      tooltip: {
+        trigger: 'item'
+      },
+      grid: {
+        top: '20%',
+        bottom: '20%',
+        right: '10%',
+        left: '18%'
+      },
+      graphic: [
+        {
+          type: 'image', // 图形元素类型
+          id: 'logo', // 更新或删除图形元素时指定更新哪个图形元素，如果不需要用可以忽略。
+          right: 'center', // 根据父元素进行定位 （居中）
+          bottom: '0%', // 根据父元素进行定位   （0%）, 如果bottom的值是 0，也可以删除该bottom属性值。
+          z: 0, // 层叠
+          bounding: 'all', // 决定此图形元素在定位时，对自身的包围盒计算方式
+          style: {
+            image:
+              'https://img0.baidu.com/it/u=3846011338,1538056540&fm=253&fmt=auto&app=138&f=PNG?w=889&h=500', // 这里一定要注意、注意，必须是https开头的图片路径地址
+            width: 1345,
+            height: 800
+          }
+        }
+      ],
+      xAxis: {
+        data: xAxisData,
+        axisTick: {
+          show: false
+        },
+        axisLine: {
+          show: false
+        },
+        axisLabel: {
+          interval: 0,
+          textStyle: {
+            color: '#fff',
+            fontSize: 20
+          },
+          margin: 40
+        }
+      },
+      yAxis: {
+        splitLine: {
+          show: false
+        },
+        axisTick: {
+          show: true,
+          alignWithLabel: true,
+          inside: true
+        },
+        axisLine: {
+          show: true
+        },
+        axisLabel: {
+          textStyle: {
+            color: '#fff',
+            fontSize: 20
+          }
+        }
+      },
+      series: [
+        // 底部的光晕
+        {
+          name: '',
+          type: 'pictorialBar',
+          tooltip: {
+            show: false
+          },
+          symbolSize: [90, 40],
+          symbolOffset: [0, 20],
+          z: 1,
+          itemStyle: {
+            normal: {
+              color: 'transparent',
+              borderColor: '#26B2E8',
+              borderType: 'solid',
+              borderWidth: 4
+            }
+          },
+          data: [1, 1, 1, 1, 1]
+        },
+        {
+          //三个最低下的圆片
+          name: '',
+          type: 'pictorialBar',
+          symbolSize: [45, 25],
+          symbolOffset: [0, 10],
+          z: 12,
+          itemStyle: {
+            opacity: 1,
+            color: function (params) {
+              var a = params.name.slice(0, 2);
+              if (a === '北京') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: 'red' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#FFD56E' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              } else if (a === '上海') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: 'red' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#5DF076' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              } else if (a === '深圳') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: 'red' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#6F8EF2' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              } else if (a === '广州') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: 'red' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#FFFFBB' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              } else if (a === '杭州') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: 'red' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#FF3EFF' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              }
+            }
+          },
+          data: [0, 0, 0, 0, 0]
+        },
+        //下半截柱状图
+        {
+          name: '2020',
+          type: 'bar',
+          barWidth: 45,
+          barGap: '-100%',
+          itemStyle: {
+            opacity: 0.7,
+            color: function (params) {
+              var a = params.name.slice(0, 2);
+              if (a === '北京') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: '#FF9A22' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#FFD56E' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              } else if (a === '上海') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: '#00EC28' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#5DF076' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              } else if (a === '深圳') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: '#12B9DB' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#6F8EF2' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              } else if (a === '广州') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: '#FFFF33' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#FFFFBB' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              } else if (a === '杭州') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: '#FF3EFF' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#FFB3FF' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              }
+            }
+          },
+          data: data1
+        },
+        {
+          name: '2022',
+          type: 'bar',
+          barWidth: 45,
+          barGap: '-100%',
+          itemStyle: {
+            color: function (params) {
+              var a = params.name.slice(0, 2);
+              if (a === '北京') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: '#FF9A22' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#FFD56E' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              }
+            }
+          },
+          data: data1
+        },
+        {
+          name: '', // 头部
+          type: 'pictorialBar',
+          symbolSize: [45, 25],
+          symbolOffset: [0, -10],
+          z: 12,
+          symbolPosition: 'end',
+          itemStyle: {
+            color: '#D28EFF',
+            opacity: 1
+          },
+          data: data2
+        },
+        {
+          name: '',
+          type: 'pictorialBar',
+          symbolSize: [45, 25],
+          symbolOffset: [0, -10],
+          z: 12,
+          itemStyle: {
+            opacity: 1,
+            color: function (params) {
+              var a = params.name.slice(0, 2);
+              if (a === '北京') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: '#FF9A22' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#FFD56E' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              } else if (a === '上海') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: '#00EC28' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#5DF076' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              } else if (a === '深圳') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: '#12B9DB' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#6F8EF2' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              } else if (a === '广州') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: '#FFFF33' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#FFFFBB' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              } else if (a === '杭州') {
+                return new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: '#FF3EFF ' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#FFB3FF' // 100% 处的颜色
+                    }
+                  ],
+                  false
+                );
+              }
+            }
+          },
+          symbolPosition: 'end',
+          data: data1
+        },
+        {
+          name: '2021',
+          type: 'bar',
+          barWidth: 45,
+          barGap: '-100%',
+          z: 0,
+          itemStyle: {
+            color: '#E8CCFF',
+            opacity: 0.7
+          },
+          data: data2
+        },
+        {
+          name: '总数',
+          type: 'bar',
+          barWidth: 45,
+          barGap: '-100%',
+          z: 0,
+          label: {
+            show: true,
+            lineHeight: 30,
+            formatter: function (params) {
+              var index = params.dataIndex;
+              return data1[index] + data2[index] + ' °C';
+            },
+            position: 'top',
+            textStyle: {
+              color: '#fff',
+              fontSize: 15
+            },
+            padding: [10, 0]
+          },
+          data: data2
+        }
+      ]
+    };
+
+
+    myChart.setOption(option);
+
+
+  </script>
+</body>
+
+</html>

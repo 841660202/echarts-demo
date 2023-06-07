@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 引入 echarts.js -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+  <!-- 引入 echarts 及其依赖的文件 -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"> -->
+</head>
+
+<body>
+  <div id="main" style="width: 600px;height:400px;"></div>
+  <script>
+    var myChart = echarts.init(document.getElementById('main'));
+    var option;
+    option = {
+      title: {
+        text: '树懒课堂访问时间分析',
+        subtext: '单位：千',
+      },
+      angleAxis: {
+        max: 12,
+      },
+      radiusAxis: {
+        type: 'category',
+        data: ['周一', '周二', '周三', '周四'],
+        z: 10
+      },
+      polar: {
+      },
+      series: [{
+        type: 'bar',
+        data: [4, 2, 3, 1],
+        coordinateSystem: 'polar',
+        name: '早上访问',
+        stack: 'a'
+      }, {
+        type: 'bar',
+        data: [2, 3, 6, 4],
+        coordinateSystem: 'polar',
+        name: '下午访问',
+        stack: 'a'
+      }, {
+        type: 'bar',
+        data: [3, 2, 1, 4],
+        coordinateSystem: 'polar',
+        name: '晚上访问',
+        stack: 'a'
+      }],
+      legend: {
+        show: true,
+        data: ['早上访问', '下午访问', '晚上访问'],
+        right: '15%',
+      }
+    };
+    myChart.setOption(option);
+  </script>
+</body>
+
+</html>
